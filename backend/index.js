@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 let cors = require("cors");
 const connectDb = require("./db");
+connectDb();
 
 const app = express();
 app.use(
@@ -21,9 +22,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/notes", require("./routes/notes"));
 
-connectDb().then(() => {
-  console.log("db connected");
-  app.listen(5000, () => {
-    console.log("listening for requests");
-  });
+app.listen(5000, () => {
+  console.log("listening for requests");
 });
